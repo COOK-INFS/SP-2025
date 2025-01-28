@@ -1,0 +1,9 @@
+{
+    "editor.inlayHints.enabled": "off",
+    "editor.parameterHints.enabled": true,
+    "editor.parameterHints.cycle": true,
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": true,
+    "emmet.showSuggestionsAsSnippets": true
+}
