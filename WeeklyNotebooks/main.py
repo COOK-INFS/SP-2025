@@ -113,21 +113,61 @@ insert_button.grid(row=6, column=0, padx=10, pady=10)
 
 # ---------------------------------------------------------------------------
 # Search functionality
+def search_record():
+    studentID = studentID_input.get()
+    sql = "select * from rcook2 where studentid = %s"
+    val = (studentID,)
+    cursor.execute(sql, val)
+    record = cursor.fetchone()
+    if record:
+        lastName_input.delete(0, tk.END)
+        firstName_input.delete(0, tk.END)
+        email_input.delete(0, tk.END)
+        lastName_input.insert(0, record[1])
+        firstName_input.insert(0, record[2])
+        email_input.insert(0, record[3])
 
-search_button = ctk.CTkButton(master=window, text="Search")
+
+
+search_button = ctk.CTkButton(master=window, text="Search", command=search_record)
 search_button.grid(row=5, column=0, padx=10, pady=10)
 
 
 
 #-------------------------------------------------------------------------------
 # Update functionality
-update_button = ctk.CTkButton(master=window, text="Update")
+def update_record():
+    studentID = studentID_input.get()
+    firstName = firstName_input.get()
+    lastName = lastName_input.get()
+    email = email_input.get()
+    sql = "update rcook2 set firstName = %s, lastName = %s, email = %s where studentid = %s"
+    val = (firstName, lastName, email, studentID)
+    cursor.execute(sql, val)
+    conn.commit()
+    clear_inputs()
+
+
+
+
+update_button = ctk.CTkButton(master=window, text="Update", command=update_record)
 update_button.grid(row=5, column=1, padx=10, pady=10)
 
 
 # -----------------------------------------------------------------------------
 # Delete
-delete_button = ctk.CTkButton(master=window, text="Delete")
+def delete_record():
+    studentID_input.get()
+    sql="delete from rcook2 where studentid = %s"
+    val = (studentID_input.get(), )
+    cursor.execute(sql, val)
+    conn.commit()
+    clear_inputs()
+
+
+
+
+delete_button = ctk.CTkButton(master=window, text="Delete", command=delete_record)
 delete_button.grid(row=6, column=1, padx=10, pady=10)
 
 
